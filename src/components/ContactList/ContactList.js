@@ -5,7 +5,7 @@ import { ContactListStyled } from './ContactList.styled';
 export const ContactList = ({ filterContacts, onDelete }) => {
   return (
     <ContactListStyled>
-      {filterContacts().map(({ name, number, id }) => (
+      {filterContacts.map(({ name, number, id }) => (
         <ContactItem
           key={id}
           name={name}
@@ -19,6 +19,8 @@ export const ContactList = ({ filterContacts, onDelete }) => {
 };
 
 ContactList.propTypes = {
-  filterContacts: propTypes.func.isRequired,
+  filterContacts: propTypes.arrayOf(propTypes.shape({id: propTypes.string.isRequired,
+    name: propTypes.string.isRequired,
+    number: propTypes.string.isRequired})),
   onDelete: propTypes.func.isRequired,
 };

@@ -16,7 +16,14 @@ export class App extends Component {
   };
   onFormSubmit = ({ id, name, number }) => {
     const contact = { id, name, number };
-    this.setState(({ contacts }) => {
+
+    this.setState(({ contacts }) => {  const nameInContacts = this.state.contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+      if (nameInContacts) {
+        alert(`${name} is already in contacts`);
+        return;
+      }
       return { contacts: [contact, ...contacts] };
     });
   };
@@ -36,17 +43,10 @@ export class App extends Component {
   };
 
   onFilterContacts = () => {
-    let filterContact = [];
-    if (this.state.filter) {
-      filterContact = this.state.contacts.filter(
-        contact =>
-          contact.name.includes(this.state.filter) ||
-          contact.name.toLowerCase().includes(this.state.filter)
+    return  this.state.contacts.filter(
+        contact => contact.name.toLowerCase().includes(this.state.filter)
       );
-    } else {
-      return this.state.contacts;
-    }
-    return filterContact;
+
   };
   render() {
     const { contacts, filter } = this.state;
@@ -54,14 +54,13 @@ export class App extends Component {
       <PhonebookContainer>
         <HeaderTitel>Phonebook</HeaderTitel>
         <ContactForm onSubmit={this.onFormSubmit} contacts={contacts} />
-
         <SecondTitel>Contacts</SecondTitel>
         <Filter onFilter={this.onFilter} filter={filter} />
         <ContactList
           contacts={contacts}
           filter={filter}
           onDelete={this.onDelete}
-          filterContacts={this.onFilterContacts}
+          filterContacts={this.onFilterContacts()}
         />
       </PhonebookContainer>
     );
