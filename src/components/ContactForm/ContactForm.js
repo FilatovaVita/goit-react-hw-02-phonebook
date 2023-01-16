@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
@@ -62,3 +63,8 @@ export class ContactForm extends Component {
     );
   }
 }
+ContactForm.propType = {
+  name: propTypes.string.isRequired,
+  number: propTypes.number.isRequired,
+  resetForm: propTypes.func.isRequired,
+};
