@@ -6,6 +6,11 @@ import * as yup from 'yup';
 import { FormStyled, InputStyle, AddButton } from './ContactForm.styled';
 
 export class ContactForm extends Component {
+  static propType = {
+    name: propTypes.string.isRequired,
+    number: propTypes.number.isRequired,
+    resetForm: propTypes.func.isRequired,
+  };
   initialValues = {
     name: '',
     number: '',
@@ -63,8 +68,3 @@ export class ContactForm extends Component {
     );
   }
 }
-ContactForm.propType = {
-  name: propTypes.string.isRequired,
-  number: propTypes.number.isRequired,
-  resetForm: propTypes.func.isRequired,
-};

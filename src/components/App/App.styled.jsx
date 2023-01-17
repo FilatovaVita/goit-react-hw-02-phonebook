@@ -24,3 +24,11 @@ export const SecondTitel = styled.h2`
   margin: 10px;
   padding-left: 210px;
 `;
+export const DefoltMassege = styled.p`
+  color: red;
+  margin: 10px;
+  text-transform: uppercase;
+  padding: 50px 170px;
+  font-weight: bolder;
+  font-size: large;
+`;

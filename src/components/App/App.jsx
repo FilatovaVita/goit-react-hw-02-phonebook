@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-import { PhonebookContainer, HeaderTitel, SecondTitel } from './App.styled';
+import {
+  PhonebookContainer,
+  HeaderTitel,
+  SecondTitel,
+  DefoltMassege,
+} from './App.styled';
 
 export class App extends Component {
   state = {
@@ -54,8 +59,17 @@ export class App extends Component {
       <PhonebookContainer>
         <HeaderTitel>Phonebook</HeaderTitel>
         <ContactForm onSubmit={this.onFormSubmit} />
-        <SecondTitel>Contacts</SecondTitel>
-        <Filter onFilter={this.onFilter} filter={filter} />
+        {this.state.contacts.length ? (
+          <div>
+            <SecondTitel>Contacts</SecondTitel>
+            <Filter onFilter={this.onFilter} filter={filter} />
+          </div>
+        ) : (
+          <DefoltMassege>
+            You dont have contacts! Please, field this Contact Form!
+          </DefoltMassege>
+        )}
+
         <ContactList
           onDelete={this.onDelete}
           filterContacts={this.onFilterContacts()}
